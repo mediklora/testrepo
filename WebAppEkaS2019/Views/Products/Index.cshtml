@@ -1,0 +1,64 @@
+﻿@model IEnumerable<WebAppEkaS2019.Models.Products>
+@{
+    ViewBag.Title = "Index";
+}
+@section scripts {
+    <script type="text/javascript">
+        $(function ()
+        {
+            $(".showProductID").click(function ()
+            {
+                let productId = $(this).data("productid");
+                alert("klikkasit tuotetta " + productId);
+            });
+        });
+        $(function ()
+        {
+            $("#naytaProductID").click(function ()
+            {
+                let productId = $(this).data("productid");
+                alert("klikkasit tuotetta " + productId);
+            });
+        });
+
+    </script>
+    }
+
+<h2>Tuotteet</h2>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Tuote ID</th>
+            <th>Tuotteen nimi</th>
+            <th>A-hinta</th>
+            <th>Varastomäärä</th>
+            <th>Tilauksessa määrä</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (WebAppEkaS2019.Models.Products tuote in Model)
+        {
+        <tr>
+            <td>@tuote.ProductID</td>
+            <td>@tuote.ProductName</td>
+            <td>@tuote.UnitPrice</td>
+            <td>@tuote.UnitsInStock</td>
+            <td>@tuote.UnitsOnOrder</td>
+            <td><button type="button" class="btn btn-info" onclick='naytaValittuTuote("@tuote.ProductName")'>Muokkaa</button> </td>
+            <td><button type="button" class="btn btn-default showProductID" data-ProductID="@tuote.ProductID">Muokkaa2</button> </td>
+            <td><button type="button" class="btn btn-default" id="naytaProductID"  data-ProductID="@tuote.ProductID">Muokkaa3</button> </td>
+        </tr>
+        }
+    </tbody>
+</table>
+
+<h4>@Model.Count() riviä</h4>
+
+<script>
+    function naytaValittuTuote(tuoteID) {
+        alert("Klikkasit tätä tuotetta: " + tuoteID);
+    }
+
+
+</script>
